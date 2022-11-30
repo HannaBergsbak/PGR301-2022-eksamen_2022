@@ -23,7 +23,7 @@ Om man skal sette små endringer ut i produksjon ofte er det viktig at det funge
 I tillegg er det som nevnt nyttig å implementere Iac ifm testing, slik at man raskt kan få greie på og rette opp i kompileringsfeil og kan luke ut bugs. 
 I tillegg er det viktig å passe på at man har godt samspill når mange skal uvikle samme løsning kontinuerlig, og det er viktig å sørge for at man ikke får merge konflikter. Det er dermed veldig viktig at man setter regler og setter seg inn i de ulike verktøyene man kan bruke for å sørge for en så sømløs opplevelse som mulig. Det å bruke en plattform som git som har verktøy som hjelper deg med å rebase, å gjøre pull requests og en versjonslogg der man kan se hva som har blitt endret osv gjør at det blir færre konflikter. 
 
-
+## OPPGAVETEKST
 
 ## Krav til leveransen
 
