@@ -1,5 +1,30 @@
 # DevOps med gode intensjoner
 
+## Del 1 besvarelse
+
+### Hva er utfordringene med dagens systemutviklingsprosess - og hvordan vil innføring av DevOps kunne være med på å løse disse? Hvilke DevOps prinsipper blir brutt?
+I dagens systemutviklingsprosess bruker de hverken CI/CD eller IaC, de prøver så godt de kan å unngå feil (noe som viser seg å være umulig) i stedet for å forvente feil og være forberedt på å bruke de til videre utvikling. I tillegg har de splittet opp teamet i to deler, utvikling og produksjon. Begrepet DevOps er satt sammen av betegnelsene for disse to teamene, development og operations. Dette navnet beskriver nettopp hva DevOps går ut på, nemlig at disse to teamene slås sammen til ett stort team der alle jobber sammen mot et felles mål.
+I oppgaveteksten står det beskrevet “Når de deployer, feiler det fortsatt ofte. Da ruller de tilbake til forrige versjon, og ny funksjonalitet blir derfor ofte forsinket i månedsvis” og dette er ikke en optimal løsning. Som beskrevet kommer det frem feil i løsningen uansett, og ved å benytte denne teknikken blir det mye vanskeligere å håndtere feilene som oppstår. Om man har små og hyppige endringer er det veldig enkelt å identifisere feilene når de oppstår fordi det ikke er gjort store endringer, noe som er tidsbesparende.
+Om man ender opp med å måtte sette løsningen tilbake til forrige versjon for å fikse bugs o.l.  er det også en fordel at det da er liten forskjell på versjonene slik at opplevelsen for brukeren er så og si sømløs. Det å sikre at selskapet har så mye uptime som mulig er viktig for business. Om det gjelder en nettbutikk, en avis eller en strømmetjeneste så finnes det i dagens marked utallige konkurrenter, og det er lett å miste kunder om applikasjonene krasjer og er nede ofte. 
+I dette scenarioet har selskapet valgt å ansette en mengde nye ansatte for å teste. I devops tar man gjerne i bruk Iac, infrastructure as code, ifm testing blant annet. Dette går ut på at man automatiserer testingen av ny kode, slik at man kan teste alle nye features og endringer ved et klikk, noe som sparer en god del tid og manpower, pluss at man får eliminert litt av potensialet for menneskelig feil med alt som blir automatisert.
+Når selskapet kun deployer endringer fire ganger i året får de store oppdateringer der man lett mister kontroll. Det er både vanskeligere å teste, vanskeligere å finne feil ved eventuelle tester som feiler, pluss at det gjerne blir forferdelig vanskelig å merge når det mest sannsynlig har vært mange som har jobbet på løsningen samtidig over en lengre periode. 
+DevOps legger også til rette for et bedre arbeidsmiljø der man som felleskap har ansvar for hele utviklingsprosessen, og man kan spille hverandre gode. Dette gjør det bedre for de ansatte i tillegg til at det gjerne reflekteres i løsningen som ender opp hos kundene.
+### En vanlig respons på mange feil under release av ny funksjonalitet er å gjøre det mindre hyppig, og samtidig forsøke å legge på mer kontroll og QA. Hva er problemet med dette ut ifra et DevOps perspektiv, og hva kan være en bedre tilnærming?
+En av fordelene med devops er at feil kan bli brukt til noe positivt i stedet for at man skal frykte feil. Feil kommer mest sannsynlig uansett, så istedenfor å fokusere på hvordan man kan unngå feil i det hele tatt bør man heller sørge for at man er rustet for å håndtere feilene på best mulig måte. Ved å oppdatere og utvikle små deler av løsningen om gangen blir det lettere å både unngå feil, men ikke minst å håndtere feil. Det er veldig mye lettere for utvikleren å se hvor en feil ligger hvis det kun er 20 linjer med kode som er endret enn om det er 200, og feilen kan dermed rettes mye fortere. Som nevnt er det også en fordel å kunne “rollbacke” til en tidligere versjon uten feil for å sikre bedre uptime, uten å måtte gå tilbake til en versjon som er veldig ulik pga store endringer mellom operative versjoner.
+I tillegg kan den nåværende holdningen til feil være skadelig for miljøet i selskapet fordi feil blir sett på noe som skal unngås til enhver pris, og det er lett å peke på hverandre og legge skyld på hverandre på tvers av teamene.
+
+### Teamet overleverer kode til en annen avdelng som har ansvar for drift - hva er utfordringen med dette ut ifra et DevOps perspektiv, og hvilke gevinster kan man få ved at team han ansvar for både drift- og utvikling?
+Det å operere i to ulike team påvirker kommunikasjon, flyt og miljø på en negativ måte. Alle disse tre elementene er viktige for å oppnå gode resultater. Jeg har allerede nevnt litt om dette tidligere i besvarelsen min.
+Om man jobber som to separate team hemmer dette kommunikasjonen mellom de ansatte, noe som er negativt når de egentlig samarbeider om et produkt. 
+Det å slå seg sammen til et team som samarbeider om hele løsningen gjør at man får bedre arbeidsmiljø og dette gir bedre resultater. 
+
+### Å release kode ofte kan også by på utfordringer. Beskriv hvilke- og hvordan vi kan bruke DevOps prinsipper til å redusere eller fjerne risiko ved hyppige leveraner.
+Om man skal sette små endringer ut i produksjon ofte er det viktig at det fungerer. Det er blant annet viktig å ha god versjonskontroll slik at man f.eks kan gå tilbake til den forrige versjonen i de tilfellene hvor ny kode har feil osv, slik at man ikke har så mye downtime. 
+I tillegg er det som nevnt nyttig å implementere Iac ifm testing, slik at man raskt kan få greie på og rette opp i kompileringsfeil og kan luke ut bugs. 
+I tillegg er det viktig å passe på at man har godt samspill når mange skal uvikle samme løsning kontinuerlig, og det er viktig å sørge for at man ikke får merge konflikter. Det er dermed veldig viktig at man setter regler og setter seg inn i de ulike verktøyene man kan bruke for å sørge for en så sømløs opplevelse som mulig. Det å bruke en plattform som git som har verktøy som hjelper deg med å rebase, å gjøre pull requests og en versjonslogg der man kan se hva som har blitt endret osv gjør at det blir færre konflikter. 
+
+
+
 ## Krav til leveransen
 
 * Eksamensoppgaven er gitt på GitHub repository ; https://github.com/PGR301-2022/eksamen_2022
