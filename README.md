@@ -1,6 +1,6 @@
-# DevOps med gode intensjoner
+# Eksamensbesvarelse
 
-## Del 1 besvarelse
+## Del 1
 
 ### Hva er utfordringene med dagens systemutviklingsprosess - og hvordan vil innføring av DevOps kunne være med på å løse disse? Hvilke DevOps prinsipper blir brutt?
 I dagens systemutviklingsprosess bruker de hverken CI/CD eller IaC, de prøver så godt de kan å unngå feil (noe som viser seg å være umulig) i stedet for å forvente feil og være forberedt på å bruke de til videre utvikling. I tillegg har de splittet opp teamet i to deler, utvikling og produksjon. Begrepet DevOps er satt sammen av betegnelsene for disse to teamene, development og operations. Dette navnet beskriver nettopp hva DevOps går ut på, nemlig at disse to teamene slås sammen til ett stort team der alle jobber sammen mot et felles mål.
@@ -22,6 +22,32 @@ Det å slå seg sammen til et team som samarbeider om hele løsningen gjør at m
 Om man skal sette små endringer ut i produksjon ofte er det viktig at det fungerer. Det er blant annet viktig å ha god versjonskontroll slik at man f.eks kan gå tilbake til den forrige versjonen i de tilfellene hvor ny kode har feil osv, slik at man ikke har så mye downtime. 
 I tillegg er det som nevnt nyttig å implementere Iac ifm testing, slik at man raskt kan få greie på og rette opp i kompileringsfeil og kan luke ut bugs. 
 I tillegg er det viktig å passe på at man har godt samspill når mange skal uvikle samme løsning kontinuerlig, og det er viktig å sørge for at man ikke får merge konflikter. Det er dermed veldig viktig at man setter regler og setter seg inn i de ulike verktøyene man kan bruke for å sørge for en så sømløs opplevelse som mulig. Det å bruke en plattform som git som har verktøy som hjelper deg med å rebase, å gjøre pull requests, workflows og en versjonslogg der man kan se hva som har blitt endret osv gjør at det blir færre konflikter. 
+
+## Del 2
+### Fra oppgaveteksten:
+*"Oppgave 3*
+
+*Branch protection og status sjekker - Beskriv hva sensor må gjøre for å konfigurere sin fork på en slik måte at*
+
+*Ingen kan pushe kode direkte på main branch*
+*Kode kan merges til main branch ved å lage en Pull request med minst en godkjenning*
+*Kode kan merges til main bare når feature branchen som pull requesten er basert på, er verifisert av GitHub Actions."*
+
+### Beskrivelse til sensor
+Når du skal sikre at ingen kan pushe kode direkte inn på main, at det kreves minst en godkjenning på en pull request for at kode kan merges til main og at endringene som er gjort må verifiseres med github actions må du inn i innstilgenene i din fork, og så under branches må du gjøre følgende:
+
+- Der det står branch protection rules har du foreøpig ingen regler, her skal du trykke på "Add branch protection rule"
+
+- Videre må du fylle ut "Branch name pattern" feltet med "main"
+
+- Huk av "Require a pull request before merging". Under dette punktet kan man også velge "required number of approvals before merging", vi vil ha 1 (verifiser at det står 1)
+
+- Huk av "Require status check to pass before merging", her dukker det opp et søkefelt hvor du skal skrive "build", etter at du klikker på build verifiserer at github actions er valgt. 
+
+- Huk av "Do not allow bypassing the above settings"
+
+- Trykk "create"
+
 
 ## OPPGAVETEKST
 
