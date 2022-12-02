@@ -50,6 +50,8 @@ Når du skal sikre at ingen kan pushe kode direkte inn på main, at det kreves m
 
 ## Del 3
 
+Frem til nå har docker workflowen feilet, dette er det jeg måtte fikse for å få den til å kjøre ok:
+
 I docker.yml filen i prosjektet står det fra linje 27:
 ```
 username: ${{ secrets.DOCKER_HUB_USERNAME }}
