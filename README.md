@@ -48,6 +48,24 @@ Når du skal sikre at ingen kan pushe kode direkte inn på main, at det kreves m
 
 - Trykk "create"
 
+## Del 3
+
+I docker.yml filen i prosjektet står det fra linje 27:
+```
+username: ${{ secrets.DOCKER_HUB_USERNAME }}
+password: ${{ secrets.DOCKER_HUB_TOKEN }}
+```
+og på linje 36:
+```
+tags: ${{ secrets.DOCKER_HUB_USERNAME }}/shopifly:latest
+```
+Problemet her er at secrets ikke er konfigurert enda. For å sette opp dette må jeg først registrere meg på docker hub. Videre må jeg inn på account settings/security og generere en ny token. Denne må jeg ta vare på til neste steg da den blir borte.
+
+Når dette er gjort må jeg inn i repository setting på github, og under secrets/actions må jeg velge "new repository secret" for å lagre de to secretsene jeg trenger
+- under navn på den første må jeg skrive DOCKER_HUB_USERNAME, og under secret må jeg fylle ut dockerhub brukernavnet mitt
+- under navn på den andre må jeg skrive DOCKER_HUB_TOKEN, og under secret må jeg fylle ut den genererte tokenen som jeg tok vare på fra forrige steg
+
+På denne måten kan man unngå å sjekke inn sensitiv informasjon
 
 ## OPPGAVETEKST
 
