@@ -50,6 +50,7 @@ Når du skal sikre at ingen kan pushe kode direkte inn på main, at det kreves m
 
 ## Del 3
 
+### Oppgave 1
 Frem til nå har docker workflowen feilet, dette er det jeg måtte fikse for å få den til å kjøre ok:
 
 I docker.yml filen i prosjektet står det fra linje 27:
@@ -68,6 +69,40 @@ Når dette er gjort må jeg inn i repository setting på github, og under secret
 - under navn på den andre må jeg skrive DOCKER_HUB_TOKEN, og under secret må jeg fylle ut den genererte tokenen som jeg tok vare på fra forrige steg
 
 På denne måten kan man unngå å sjekke inn sensitiv informasjon
+
+### Oppgave 3
+
+Beskriv deretter med egne ord hva sensor må gjøre for å få sin fork til å laste opp container image til sitt eget ECR repo:
+For at sensor skal kunne få sin fork til å laste opp container image til sitt eget ECR repo må sensor legge til følgende linjer i docker.yml filen.
+
+```
+- name: Build and push Docker image
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 244530008913.dkr.ecr.eu-west-1.amazonaws.com
+          rev=$(git rev-parse --short HEAD)
+          docker build . -t shopifly
+          docker tag shopifly 244530008913.dkr.ecr.eu-west-1.amazonaws.com/1057:$rev
+          docker push 244530008913.dkr.ecr.eu-west-1.amazonaws.com/1057:$rev
+```
+
+
+Først må sensor i likhet med på dockerhub opprette sikkerhetsnøkler. For å oppnå dette må sensor gå til IAM i AWS og fine sin egen IAM bruker. Deretter må de under "Security credentials" velge Create Access Key. Igjen er det viktig å notere seg den hemmelige nøkkelen da den blir borte etter at den er vist en gang. 
+
+Videre må sensor inn i repository settings på github, og under secrets/actions må sensor velge "new repository secret" for å lagre de to nye verdiene vi trenger
+
+- Under navn på den første må sensor skrive AWS_ACCESS_KEY_ID, og under secret må sensor fylle ut IDen til nøkkelen
+- Under navn på den andre må sensor skrive AWS_SECRET_ACCESS_KEY, og under secret må sensor fylle ut nøkkelen som jeg tok vare på fra forrige steg
+
+Der hvor jeg har satt inn kandidatnummer må sensor sette inn savnet på ecr repoet sitt
+
+Jeg har også opprettet en variabel som heter "rev" som gjør at hvert image som blir pushet til ecr repoet mitt får et navn som er likt som IDen til commiten som trigget det nye imaget.
+
+For å teste at dette er i orden kan sensor pushe endringene som er gjort i docker.yml filen, og vente til hen ser at workflowen blir grønn som betyr at prosessen er ferdig, og deretter gå inn i ECR funksjonen i AWS og se om det har blitt opprettet et nytt image under repoet sitt med tag som matcher commit IDen på github.
+
+
 
 ## OPPGAVETEKST
 
