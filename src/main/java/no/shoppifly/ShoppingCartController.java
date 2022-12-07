@@ -18,6 +18,7 @@ public class ShoppingCartController implements ApplicationListener<ApplicationRe
     @Autowired
     private NaiveCartImpl naiveCart;
 
+    @Autowired
     private MeterRegistry meterRegistry;
 
     public ShoppingCartController(CartService cartService) {
@@ -57,7 +58,7 @@ public class ShoppingCartController implements ApplicationListener<ApplicationRe
      */
     @GetMapping(path = "/carts")
     public List<String> getAllCarts() {
-        return cartService.getAllsCarts();
+        return cartService.getsAllCarts();
     }
 
 

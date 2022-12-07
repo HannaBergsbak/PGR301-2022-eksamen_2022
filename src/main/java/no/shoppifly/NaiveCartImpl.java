@@ -30,7 +30,7 @@ class NaiveCartImpl implements CartService {
     }
 
     @Override
-    public List<String> getAllsCarts() {
+    public List<String> getsAllCarts() {
         return new ArrayList<>(shoppingCarts.keySet());
     }
 
