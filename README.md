@@ -102,7 +102,17 @@ Jeg har også opprettet en variabel som heter "rev" som gjør at hvert image som
 
 For å teste at dette er i orden kan sensor pushe endringene som er gjort i docker.yml filen, og vente til hen ser at workflowen blir grønn som betyr at prosessen er ferdig, og deretter gå inn i ECR funksjonen i AWS og se om det har blitt opprettet et nytt image under repoet sitt med tag som matcher commit IDen på github.
 
+## Del 4 og Del 5
 
+Jeg ble ikke helt ferdig med å implementere metrics med widgets for: 
+
+- Total sum med penger i handlekurver på et gitt tidspunkt i tid - verdien kan gå opp og ned ettersom kunder sjekker ut handlekurver og nye blir laget.
+- Totalt antall handlevogner er blitt "sjekket ut" per time
+- Gjennomsnittlig responstid for Checkout metoden i Controller-klassen
+
+Jeg forsøkte så godt jeg kunne å komme så nære som mulig og håper at jeg kanskje var inne på noe og kan få litt uttelling her. 
+
+Det samme gjelder med alarmen, jeg har gjort så godt jeg kan i sns_topic_for_alarm.tf klassen men fikk ikke gått videre med dette.
 
 ## OPPGAVETEKST
 
