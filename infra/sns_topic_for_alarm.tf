@@ -10,18 +10,18 @@ resource "aws_sns_topic_subscription" "user_updates_sqs_target" {
 
 
 resource "aws_cloudwatch_metric_alarm" "zerosum" {
-  alarm_name                = "bank-sum-must-be-0"
-  namespace                 = "glennbech"
-  metric_name               = "bank_sum.value"
+  alarm_name                = "cart-sum-exeeds-5"
+  namespace                 = "${var.candidate_id}"
+  metric_name               = "cart_sum.value"
 
   comparison_operator       = "GreaterThanThreshold"
-  threshold                 = "0"
-  evaluation_periods        = "2"
-  period                    = "60"
+  threshold                 = "5"
+  evaluation_periods        = "3"
+  period                    = "300"
 
   statistic                 = "Maximum"
 
-  alarm_description         = "This alarm goes off as soon as the total amount of money in the bank exceeds 0 "
+  alarm_description         = "This alarm goes off as soon as the total amount of carst exceeds 5 "
   insufficient_data_actions = []
   alarm_actions       = [aws_sns_topic.alarms.arn]
 }
