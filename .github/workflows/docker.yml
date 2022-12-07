@@ -19,4 +19,3 @@ jobs:
           docker build . -t shopifly
           docker tag shopifly 244530008913.dkr.ecr.eu-west-1.amazonaws.com/1057:$rev
           docker push 244530008913.dkr.ecr.eu-west-1.amazonaws.com/1057:$rev
-          docker run shopifly
