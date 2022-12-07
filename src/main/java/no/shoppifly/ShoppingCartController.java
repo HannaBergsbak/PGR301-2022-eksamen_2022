@@ -1,5 +1,6 @@
 package no.shoppifly;
 
+import io.micrometer.core.annotation.Timed;
 import io.micrometer.core.instrument.Gauge;
 import io.micrometer.core.instrument.MeterRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +36,16 @@ public class ShoppingCartController implements ApplicationListener<ApplicationRe
      *
      * @return an order ID
      */
+    @Timed(value = "checkout_latency")
     @PostMapping(path = "/cart/checkout")
     public String checkout(@RequestBody Cart cart) {
+
+        /*
+        Jeg bruker @Timed her for å få checkout latency, og i stedet for å skrive "checkout_latency.value" i tf filen bruker jeg "checkout_latency.avg"
+        Jeg bruker counter her fordi vi kun er ute etter hvor mange som har "checked out" ila hele løpet til applikasjonen, og dette tallet øker bare
+        */
+
+        meterRegistry.counter("checkouts_sum").increment();
         return cartService.checkout(cart);
     }
 
@@ -61,10 +70,18 @@ public class ShoppingCartController implements ApplicationListener<ApplicationRe
         return cartService.getsAllCarts();
     }
 
+    @GetMapping(path = "/total")
+    public float getTotal() {
+        return cartService.total();
+    }
+
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent applicationReadyEvent) {
+        //Jeg bruker gague her fordi verdiene skal kunne øke og minske kontinuerlig ettersom aplikasjonen blir brukt, i motsetning til i checkout counteren litt over
         Gauge.builder("cart_count", naiveCart.shoppingCarts,
                 b -> b.values().size()).register(meterRegistry);
+
+        Gauge.builder("cart_sum", this::getTotal).register(meterRegistry);
     }
 }
